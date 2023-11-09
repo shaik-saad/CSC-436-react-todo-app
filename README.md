@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# CSC 436: react-todo-app
+This repository contains code for CSC-436 Web Applications Lab work.
+## **Table of contents**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+- [HW-Two](#hw-two)
+- [Technologies used](#technologies-used)
+- [Issue Reporting](#issue-reporting)
+- [Author](#author)
 
-## Available Scripts
 
-In the project directory, you can run:
+## **HW-two** : 
+Requirements:
+Your application must contain the the following functionality:
+1. Login, Registration, and Logout (you’re only building front-end components, so these do
+not actually need to validate or persist credentials.)
+2. A Todolist containing individual Todo items
+3. A form to add new Todo to the Todolist.
+4. An individual Todo item should consist of the following data/props:
+a. title (this is a required field, form should not submit without it)
+b. description (this is an optional field, it is not required to submit the form)
+c. author (this is the currently logged in user’s username)
+d. dateCreated (this field is set dynamically when the form is submitted – research
+the JS lib method Date.now())
+e. complete (a boolean initially set to false when a Todo is created)
+f. dateCompleted (this field is set dynamically when the form is submitted)
+5. When rendering a Todo a checkbox should be used to display the value of the “complete”
+field. Checking/unchecking the checkbox should update the value of the “complete” field
+appropriately. The dateCompeleted field should also be updated (again, dynamically
+utilizing Date.now()).
 
-### `npm start`
+## **Technologies used**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- HTML5
+- CSS3
+- JS
+- React.js
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## **Issue Reporting**
 
-### `npm test`
+Encountered a bug or have a feature request ? Please do check the issues tab for existing and closed issue / request. If it does not exist, [please open a new issue](https://github.com/shaik-saad/CSC-436-lab-one/issues).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## **Author**
 
-### `npm run build`
+- **Twitter** - [shaiksaadullah](https://twitter.com/shaiksaadullah)
+- **LinkedIn** - [shaik-saad](https://www.linkedin.com/in/shaik-saad)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
