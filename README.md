@@ -2,34 +2,34 @@
 This repository contains code for CSC-436 Web Applications Lab work.
 ## **Table of contents**
 
-- [HW-Two](#hw-two)
-- [HW-Three](#hw-three)
+- [LAB-TWO](#lab-two)
+- [LAB-THREE](#lab-three)
+- [LAB-FOUR](#lab-four)
 - [Technologies used](#technologies-used)
 - [Issue Reporting](#issue-reporting)
 - [Author](#author)
 
 
-## **HW-Two** : 
-Requirements:
+## **LAB-TWO** : 
+**Requirements:**
 Your application must contain the the following functionality:
 1. Login, Registration, and Logout (you’re only building front-end components, so these do
 not actually need to validate or persist credentials.)
 2. A Todolist containing individual Todo items
 3. A form to add new Todo to the Todolist.
 4. An individual Todo item should consist of the following data/props:
-a. title (this is a required field, form should not submit without it)
-b. description (this is an optional field, it is not required to submit the form)
-c. author (this is the currently logged in user’s username)
-d. dateCreated (this field is set dynamically when the form is submitted – research
-the JS lib method Date.now())
-e. complete (a boolean initially set to false when a Todo is created)
-f. dateCompleted (this field is set dynamically when the form is submitted)
+    - a. title (this is a required field, form should not submit without it)
+    - b. description (this is an optional field, it is not required to submit the - form)
+    - c. author (this is the currently logged in user’s username)
+    - d. dateCreated (this field is set dynamically when the form is submitted – research the JS lib method Date.now())
+    - e. complete (a boolean initially set to false when a Todo is created)
+    - f. dateCompleted (this field is set dynamically when the form is submitted)
 5. When rendering a Todo a checkbox should be used to display the value of the “complete”
 field. Checking/unchecking the checkbox should update the value of the “complete” field
 appropriately. The dateCompeleted field should also be updated (again, dynamically
 utilizing Date.now()).
 
-## **HW-Three**:
+## **LAB-THREE**:
 **Goal:** Add interactivity to the React Todo App built in lab2 by making converting components containing input elements into controlled components and adding a user and post reducer to update application state.
 
 **Requirements:**
@@ -51,12 +51,49 @@ todo state.
     field and sets the dateCompleted field)
     - DELETE_TODO (removes a specific todo from your todo list)
 
+
+## **LAB-FOUR**:
+**Goal:** 
+Manage global state using React Context and add data persistence to the React Todo
+App built in hw2 and hw3 by issuing REST calls (using Axios and the useResource hook) to a
+mock API (powered by json-server).
+
+**Requirements:**
+Update the your components to stop passing state and dispatch methods via props and
+instead create a StateContext, similar to the way demonstrated in class and then utilize then
+consume the StateContext in components which require access to state, dispatch, or both.’
+Perform steps 2-7 to utilize a mock API to persist application data.
+1. Add StateContext
+    - Create a StateContext in a contexts.js file.
+    - In App.js, wrap your components in a `<StateContext.Provider>` passing values for
+    state and dispatch from your appReducer
+    - In App.js, remove state and dispatch props from your UserBar, CreateTodo, and
+    TodoList components (your component names and structure may be different
+    depending on how you implemented things thus far); instead, utilize the
+    useContext hook within any component which may require access to state or
+    dispatch.
+2. Create a Mock API using json-server
+Configure json-server and json-server-auth to run alongside your application using
+the db.json, setupProxy.js, and package.json startup commands. Reference Week 5’s
+lecture for configuring these items.
+Please reference the lecture for detailed instruction on how to utilize the files and
+commands to startup the mock API.
+3. Configure an Axios instance and RequestProvider in index.js (See week 5 lecture)
+4. Use the useResource hook in order to retrieve Todos from the mock API and
+remove the hardcoded intialTodos list in app.js. 
+5. Use the useResource hook in order to issue a `POST` request to the mock API in
+order to persist your Todo to db.json. 
+6. Use the useResource hook in order to `GET/POST` requests to the mock in order to perform Login and Register. 
+7. Use the useResource hook in order to perform the appropriate HTTP request to
+update a Todo existing in db.json for `TOGGLE_TOD`O and `DELETE_TODO` actions
+
 ## **Technologies used**
 
 - HTML5
 - CSS3
 - JS
 - React.js
+- Node.js
 
 ## **Issue Reporting**
 
