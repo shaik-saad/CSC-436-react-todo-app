@@ -1,18 +1,22 @@
-import {v4 as uuidv4} from 'uuid'
+import { useState } from 'react'
 
 
-export default function AddTodo({ user, newTodoItem, setNewTodoItem, handleAddTodo }){
+export default function AddTodo({ user, dispatchTodos }){
+
+    const [title, setTitle] = useState("")
+    const [description, setDescription] = useState("")
 
     // Title and description input handlers
-    const handleTitle = e => setNewTodoItem({...newTodoItem, title: e.target.value})
-    const handleDescription = e => setNewTodoItem({...newTodoItem, description: e.target.value})
+    const handleTitle = e => setTitle(e.target.value)
+    const handleDescription = e => setDescription(e.target.value)
 
     // Form submit handler
     const handleSubmit = () => {
-        // dynamic values are updated and passed to AddTodo handler
-        const createdTodoItem = {...newTodoItem, id: uuidv4(), author: user, dateCreated: new Date().toLocaleDateString()}
-        console.log(createdTodoItem.id)
-        handleAddTodo(createdTodoItem)
+        // Todo's info is passed to dispatch as payload and dynamic values are added inside the reducer
+        dispatchTodos({type: "CREATE_TODO", payload: {title, description, author: user}})
+        // cleaning inputs after form submission 
+        setTitle("")
+        setDescription("")
     }
     return (
         <form 
@@ -22,10 +26,10 @@ export default function AddTodo({ user, newTodoItem, setNewTodoItem, handleAddTo
             }}>
             <h3>Add a Todo:</h3>
             <label htmlFor="title">Title: *</label>
-            <input type="text" id="title" name="title" onChange={handleTitle}/>
+            <input type="text" id="title" name="title" value={title} onChange={handleTitle}/>
             <label htmlFor="description">Description:</label>
-            <textarea id="description" onChange={handleDescription}/>
-            <input type="submit" value="ADD"/>
+            <textarea id="description" value={description} onChange={handleDescription}/>
+            <input type="submit" value="ADD" disabled={title === ""}/>
         </form>
     );
 }

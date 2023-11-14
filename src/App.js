@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useReducer} from "react";
 import AuthenticationBar from "./AuthenticationBar";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
+import { todoReducer, userReducer } from "./reducers";
 
 function App() {
 
@@ -16,37 +17,17 @@ function App() {
     dateCompleted: "11-06-2023"
   }]
 
-  const [user, setUser] = useState("");
-  const [todoList, setTodoList] = useState(initialList)
-
-  // Some of the values were updated while adding a todo and others were updated in Todo Component
-  // Extracting and moving them over here makes it to easily update the values.
-  const [newTodoItem, setNewTodoItem] = useState({
-    id: "",
-    title: "",
-    description: "",
-    author: "",
-    dateCreated: "",
-    isComplete: false,
-    dateCompleted: ""
-})
-
-// New todo is added to the todoList state
-  const handleAddTodo = (newTodo) => {
-    setTodoList([newTodo, ...todoList])
-  }
-
-  const handleUpdateTodo = (updateTodo) => {
-    // TodoList is updated using map method, in which it replaces it with the updated todo item and returns a whole new updated array.
-    setTodoList(todoList.map((todo, index) => todo.id === updateTodo.id ? todoList[index] = updateTodo : todo))
-  }
+  // useReducer used for maintaining user's name at global level
+  // initial list stored as a global state and updated using useReducer's dispatch
+  const [user, dispatchUser] = useReducer(userReducer, "")
+  const [todos, dispatchTodos] = useReducer(todoReducer, initialList)
 
   return (
     <>
-     <AuthenticationBar user={user} setUser={setUser}/>
+     <AuthenticationBar user={user} dispatchUser={dispatchUser}/>
      {/* Conditional rendering, only if the user value is Truthy.*/}
-     {user && <AddTodo user={user} newTodoItem={newTodoItem} setNewTodoItem={setNewTodoItem} handleAddTodo={handleAddTodo}/>}
-     {user && <TodoList todoList={todoList} handleUpdateTodo={handleUpdateTodo}/>}
+     {user && <AddTodo user={user} dispatchTodos={dispatchTodos}/>}
+     {user && <TodoList todos={todos} dispatchTodos={dispatchTodos}/>}
     </>
   );
 }

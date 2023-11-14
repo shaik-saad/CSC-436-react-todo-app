@@ -1,33 +1,33 @@
-export default function Todo({ todo, handleUpdateTodo }) {
+export default function Todo({ todo, dispatchTodos }) {
 
   const {id, title, description, author, dateCreated, isComplete, dateCompleted } = todo;
   
   const handleComplete = (e) => {
-    // Updating the dynamic values based on event target
-    const updateTodo = {
-      ...todo,
-      isComplete: e.target.checked,
-      dateCompleted: e.target.checked === true ? new Date().toLocaleDateString() : ""
-    };
-    handleUpdateTodo(updateTodo);
+    // isCompleted value based on event target is passed and dynamic values are updated inside the reducer
+    dispatchTodos({type: "TOGGLE_TODO", payload: {...todo, isComplete: e.target.checked}})
   };
+
+  const handleDelete = () => {
+    dispatchTodos({type: "DELETE_TODO", payload: {id}})
+  }
 
   return (
     <li>
       <h3>{title}</h3>
       <p>{description}</p>
-      <form>
-      <input
-        type="checkbox"
-        id={`checkbox-id-${id}`}
-        name={`checkbox-id-${id}`}
-        checked={isComplete}
-        onChange={handleComplete}
-      />
-      <label htmlFor={`checkbox-id-${id}`}>
-        {isComplete ? "Completed" : "Mark as Complete"}
-      </label>
-      </form>
+      <div>
+          <input
+            type="checkbox"
+            id={`checkbox-id-${id}`}
+            name={`checkbox-id-${id}`}
+            checked={isComplete}
+            onChange={handleComplete}
+          />
+          <label htmlFor={`checkbox-id-${id}`}>
+            {isComplete ? "Completed" : "Mark as Complete"}
+          </label>
+      </div>
+      <button type="button" onClick={handleDelete}>DELETE</button>
       <footer>
         <div>
           Todo by: <b>{author}</b>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Login({ setUser }){
+export default function Login({ dispatchUser }){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -13,7 +13,7 @@ export default function Login({ setUser }){
         <form 
             onSubmit={e => {
                 e.preventDefault();
-                setUser(username)
+                dispatchUser({type: "LOGIN", username})
                 } 
             }
         >
