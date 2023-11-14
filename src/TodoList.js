@@ -1,10 +1,10 @@
 import Todo from "./Todo";
 
-export default function TodoList({ todos = [], dispatchTodos }){
+export default function TodoList({ todos = [], dispatch }){
     return (
         <ul>
             {/* todolist state array is mapped to display the list items */}
-            {todos.map((todo) => <Todo todo={todo} dispatchTodos={dispatchTodos} key={todo.id}/>)}
+            {todos.map((todo) => <Todo todo={todo} dispatch={dispatch} key={todo.id}/>)}
         </ul>
     )
 }

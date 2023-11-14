@@ -1,10 +1,10 @@
-export default function Logout({ user, dispatchUser }){
+export default function Logout({ user, dispatch }){
     return (
         // Clearing user's value upon logout
         <form 
             onSubmit={e => {
                 e.preventDefault();
-                dispatchUser({type: "LOGOUT"})
+                dispatch({type: "LOGOUT", payload: {}})
                 }
             }
         >

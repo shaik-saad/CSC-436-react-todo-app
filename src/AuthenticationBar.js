@@ -2,15 +2,15 @@ import Login from "./Login";
 import Logout from "./Logout";
 import Register from "./Register";
 
-export default function AuthenticationBar({ user, dispatchUser}){
+export default function AuthenticationBar({ user, dispatch}){
 
     // If user value is present, Logout Component is displayed. Else Login?Register Components are displayned.
-    if (user) return <Logout user={user} dispatchUser={dispatchUser}/>
+    if (user) return <Logout user={user} dispatch={dispatch}/>
     else {
         return (
             <>
-                <Login dispatchUser={dispatchUser}/>
-                <Register dispatchUser={dispatchUser}/>
+                <Login dispatch={dispatch}/>
+                <Register dispatch={dispatch}/>
             </>
         )
     };

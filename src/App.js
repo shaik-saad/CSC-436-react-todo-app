@@ -2,7 +2,7 @@ import { useReducer} from "react";
 import AuthenticationBar from "./AuthenticationBar";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
-import { todoReducer, userReducer } from "./reducers";
+import appReducer from "./reducers";
 
 function App() {
 
@@ -19,15 +19,19 @@ function App() {
 
   // useReducer used for maintaining user's name at global level
   // initial list stored as a global state and updated using useReducer's dispatch
-  const [user, dispatchUser] = useReducer(userReducer, "")
-  const [todos, dispatchTodos] = useReducer(todoReducer, initialList)
+  const [state, dispatch] = useReducer(appReducer, {
+    user: "",
+    todos: initialList
+  })
+
+  const {user, todos} = state;
 
   return (
     <>
-     <AuthenticationBar user={user} dispatchUser={dispatchUser}/>
+     <AuthenticationBar user={user} dispatch={dispatch}/>
      {/* Conditional rendering, only if the user value is Truthy.*/}
-     {user && <AddTodo user={user} dispatchTodos={dispatchTodos}/>}
-     {user && <TodoList todos={todos} dispatchTodos={dispatchTodos}/>}
+     {user && <AddTodo user={user} dispatch={dispatch}/>}
+     {user && <TodoList todos={todos} dispatch={dispatch}/>}
     </>
   );
 }

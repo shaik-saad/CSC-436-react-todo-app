@@ -1,11 +1,13 @@
 import {v4 as uuidv4} from 'uuid'
 
-export const userReducer = (state, action) => {
-    switch (action.type) {
+const userReducer = (state, action) => {
+    const {type, payload} = action;
+    const {username} = payload;
+    switch (type) {
         case "LOGIN":
-            return action.username;
+            return username;
         case "REGISTER":
-            return action.username;
+            return username;
         case "LOGOUT":
             return "";
         default:
@@ -13,7 +15,7 @@ export const userReducer = (state, action) => {
     }
 }
 
-export const todoReducer = (state, action) => {
+const todoReducer = (state, action) => {
     const {type, payload} = action;
     const {id, title, description, author, isComplete} = payload;
     switch (type) {
@@ -39,4 +41,11 @@ export const todoReducer = (state, action) => {
         default:
             return state;
     }
+}
+
+export default function appReducer(state, action){
+return {
+    user: userReducer(state.user, action),
+    todos: todoReducer(state.todos, action)
+}
 }

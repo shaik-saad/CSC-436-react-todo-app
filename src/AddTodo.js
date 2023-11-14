@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 
-export default function AddTodo({ user, dispatchTodos }){
+export default function AddTodo({ user, dispatch }){
 
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
@@ -13,7 +13,7 @@ export default function AddTodo({ user, dispatchTodos }){
     // Form submit handler
     const handleSubmit = () => {
         // Todo's info is passed to dispatch as payload and dynamic values are added inside the reducer
-        dispatchTodos({type: "CREATE_TODO", payload: {title, description, author: user}})
+        dispatch({type: "CREATE_TODO", payload: {title, description, author: user}})
         // cleaning inputs after form submission 
         setTitle("")
         setDescription("")

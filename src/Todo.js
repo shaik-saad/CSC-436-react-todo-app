@@ -1,14 +1,14 @@
-export default function Todo({ todo, dispatchTodos }) {
+export default function Todo({ todo, dispatch }) {
 
   const {id, title, description, author, dateCreated, isComplete, dateCompleted } = todo;
   
   const handleComplete = (e) => {
     // isCompleted value based on event target is passed and dynamic values are updated inside the reducer
-    dispatchTodos({type: "TOGGLE_TODO", payload: {...todo, isComplete: e.target.checked}})
+    dispatch({type: "TOGGLE_TODO", payload: {...todo, isComplete: e.target.checked}})
   };
 
   const handleDelete = () => {
-    dispatchTodos({type: "DELETE_TODO", payload: {id}})
+    dispatch({type: "DELETE_TODO", payload: {id}})
   }
 
   return (
