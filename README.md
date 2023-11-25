@@ -1,10 +1,11 @@
 # CSC 436: react-todo-app
-This repository contains code for CSC-436 Web Applications Lab work.
+This repository contains code for CSC-436 Web Applications Lab work. Throughout the labs a Todo App is built using MERN. 
 ## **Table of contents**
 
 - [LAB-TWO](#lab-two)
 - [LAB-THREE](#lab-three)
 - [LAB-FOUR](#lab-four)
+- [LAB-FIVE](#lab-five)
 - [Technologies used](#technologies-used)
 - [Issue Reporting](#issue-reporting)
 - [Author](#author)
@@ -85,7 +86,25 @@ remove the hardcoded intialTodos list in app.js.
 order to persist your Todo to db.json. 
 6. Use the useResource hook in order to `GET/POST` requests to the mock in order to perform Login and Register. 
 7. Use the useResource hook in order to perform the appropriate HTTP request to
-update a Todo existing in db.json for `TOGGLE_TOD`O and `DELETE_TODO` actions
+update a Todo existing in db.json for `TOGGLE_TODO` and `DELETE_TODO` actions
+
+## **LAB-FIVE**:
+**Goal:** 
+Replace your json-server backend implementation with a Node.js backend implementation. 
+
+**Requirements:**
+1. Implement proper authentication using bCrypt to store credentials securely and
+authorize user requests using jsonwebtoken.
+    - a. When a user registers, passwords should be hashed using `bCrypt.hash()`
+before inserting into the database.
+    - b. When a user logs in, their plaintext password should be compared to the
+stored hash using `bCrypt.compare()`, if comparison returns true, a body containing an access_token should be returned. The payload should be the user’s database ID.
+2. Creating, toggling, or deleting a Todo require an Authorization token to be passed and a user should only be able to perform these operations on their own todos. Store the Authorization access_token in your React application and send it as a header when issuing these requests.
+    - i. Update the POST route handler to deal with complete and dateCompleted property.
+    - ii. Add a DELETE route handler + implement logic to delete a todo.
+    - iii. Add a PUT or PATCH route handler for toggling a todo’s complete
+property.
+
 
 ## **Technologies used**
 
@@ -94,6 +113,8 @@ update a Todo existing in db.json for `TOGGLE_TOD`O and `DELETE_TODO` actions
 - JS
 - React.js
 - Node.js
+- Express.js
+- MongoDB
 
 ## **Issue Reporting**
 

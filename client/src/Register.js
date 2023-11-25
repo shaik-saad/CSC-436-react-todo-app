@@ -5,22 +5,28 @@ export default function Register({ dispatch }){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [repeatPassword, setRepeatPassword] = useState("")
+    const [isRegistrationSuccessful, setIsRegistrationSuccessful] = useState(false)
+    const [message, setMessage] = useState("")
 
-    //user add request to mock server
-    const [user, register] = useResource((username, password) => ({
-        url: '/register',
+    //Hook for user resgistration request to express server
+    const [user, register] = useResource((username, password, repeatPassword) => ({
+        url: '/auth/register',
         method: 'post',
-        data: {email: username, password}
+        data: {username, password, passwordConfirmation: repeatPassword}
     }))
 
     useEffect(() => {
-        if(user && user.data){
-            // updating user's name in global state
-            dispatch({type: "REGISTER", payload: {username: user.data.user.email}})
+        if(user && user.isLoading === false && user.data){
+            // if user registration is successful updating the message
+            setIsRegistrationSuccessful(true)
+            setMessage("YAYY! Registration successful, you may now login.")
             //clearing local states
             setUsername("");
             setPassword("")
             setRepeatPassword("")
+        } else if(user?.error) {
+            setIsRegistrationSuccessful(false)
+            setMessage("OOPS! Registration failed, please try again.")
         }
     }, [user])
     
@@ -29,14 +35,15 @@ export default function Register({ dispatch }){
     const handlePassword = e => setPassword(e.target.value)
     const handleRepeatPassword = e => setRepeatPassword(e.target.value)
     return (
-        // On Submission username is saved in it's respective state in App.js.
+        // On Submission register() makes a request to express-server for registration
         <form 
             onSubmit={e => {
                 e.preventDefault();
-                register(username, password);
+                register(username, password, repeatPassword);
                 }
             }
-        >
+        >   
+            <p style={{color: isRegistrationSuccessful? "green" : 'red'}}>{message}</p>
             <label htmlFor="register-username">Username:</label>
             <input type="email" id="register-username" name="register-username" value={username} onChange={handleUsername} required/>
             <label htmlFor="register-password">Password:</label>

@@ -8,28 +8,33 @@ import { useResource } from "react-request-hook";
 
 function App() {
 
-  // useReducer used for maintaining user's name and todo list at global level
-  // Empty user string and empty todos array are passed in a object as Initial State
+  // useReducer used for maintaining username, access_token and todo list at global level
+  // Empty user object and empty todos array are passed in a object as Initial State
   const [state, dispatch] = useReducer(appReducer, {
-    user: "",
+    user: {},
     todos: []
   })
 
   const {user} = state;
 
-  //Read todo list from mock server
+  //Hook to read todo list from mongoDB using express server
   const [todos, getTodos] = useResource(() => ({
-    url: '/todos',
-    method: 'get'
+    url: '/todo',
+    method: 'get',
+    headers: {"Authorization": user.access_token}
   }))
 
-  //getTodos fired up only once when component is mounted
-  useEffect(getTodos, [])
+  //getTodos fires up whenever user state is updated 
+  useEffect(() => {
+    if(user.username) {
+      getTodos()
+    }
+  }, [user])
 
   // updating todo list in global state 
   useEffect(() => {
-    if(todos && todos.data){
-      dispatch({type: "FETCH_TODOS", payload: {todos: todos.data.reverse()}})
+    if(todos && todos.isLoading === false && todos.data){
+      dispatch({type: "FETCH_TODOS", payload: todos.data.reverse()})
     }
   }, [todos])
 
@@ -39,8 +44,8 @@ function App() {
         <h1>React Todo App</h1>
         <AuthenticationBar/>
         {/* Conditional rendering, only if the user value is Truthy.*/}
-        {user && <AddTodo/>}
-        {user && <TodoList/>}
+        {user.username && <AddTodo/>}
+        {user.username && <TodoList/>}
       </StateContext.Provider>
     </>
   );

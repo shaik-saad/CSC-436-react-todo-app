@@ -6,11 +6,11 @@ export default function Login({ dispatch }){
     const [password, setPassword] = useState("");
     const [loginFailed, setLoginFailed] = useState(false)
 
-    //user login request to mock server
+    //Hook for user login request to express server
     const [user, login] = useResource((username, password) => ({
-        url: '/login',
+        url: '/auth/login',
         method: 'post',
-        data: {email: username, password}
+        data: { username, password }
     }))
 
     // Handling user's inputs
@@ -19,9 +19,9 @@ export default function Login({ dispatch }){
 
     useEffect(() => {
         if(user && user.data){
-            // If user exists in db updating user's name in global state
+            // If user exists in db updating username and access_token in global state
             setLoginFailed(false)
-            dispatch({type: "LOGIN", payload: {username: user.data.user.email}})
+            dispatch({type: "LOGIN", payload: {username: username, access_token: user.data.access_token}})
             setUsername("")
             setPassword("")
         }

@@ -1,13 +1,11 @@
 const userReducer = (state, action) => {
     const {type, payload} = action;
-    const {username} = payload;
+    const {username, access_token} = payload;
     switch (type) {
         case "LOGIN":
-            return username;
-        case "REGISTER":
-            return username;
+            return {username, access_token};
         case "LOGOUT":
-            return "";
+            return {};
         default:
             return state;
     }
@@ -15,20 +13,22 @@ const userReducer = (state, action) => {
 
 const todoReducer = (state, action) => {
     const {type, payload} = action;
-    const { id } = payload;
+    const { _id } = payload;
     switch (type) {
         case "CREATE_TODO":
             return [payload, ...state];
         case "TOGGLE_TODO": 
             const updatedTodos = state.map((todo, index) =>  {
-                return todo.id === id ? state[index] = payload : todo
+                return todo._id === _id ? state[index] = payload : todo
             })
             return updatedTodos
         case "DELETE_TODO":
-            const reducedTodos = state.filter((todo) => todo.id !== id)
+            const reducedTodos = state.filter((todo) =>  todo._id !== _id)
             return reducedTodos
         case "FETCH_TODOS":
-            return payload.todos
+            return payload
+        case "CLEAR_TODOS":
+            return [];
         default:
             return state;
     }
