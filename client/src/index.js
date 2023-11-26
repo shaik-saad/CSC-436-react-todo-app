@@ -6,7 +6,7 @@ import axios from 'axios';
 
 // creating base URL using axios
 const axiosinstance = axios.create({
-  baseURL: 'http://localhost:3000/api'
+  baseURL: process.env.REACT_APP_BACKEND_API || 'http://localhost:3000/api'
 })
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
